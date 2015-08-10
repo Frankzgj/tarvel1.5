@@ -1,0 +1,59 @@
+/* CSS Document */
+
+body{
+	background-color:#2286c6;
+	margin: 0px;
+	padding:0px;
+}
+#container{
+	position:relative;
+	margin:0px auto 0px auto;
+	width:780px;
+	height:780px;
+	text-align:left;
+}
+#banner{
+      background:url('picture/changsha.jpg') no-repeat;width:780px;height:220px;
+	  FILTER:ALPHA(opacity=50,finishopacity=80,style=2;
+}
+
+#bread{
+      margin:35px;
+}
+#tripname{
+	margin:35px;
+	font-size:35px;
+	font-family:Geneva, Arial, Helvetica, sans-serif;
+}
+
+#trippicture{
+	margin-top:20px;
+	width:780px;
+	height:auto;
+	margin:15px 0px 0px 0px;
+	padding:0px;
+}
+#trippicture ul{
+	list-style:none;
+	margin:8px 1px 0px 1px;
+	padding:0px;
+}
+#trippicture ul li{
+	float:left;
+	width:97px;
+	margin-left:11px;
+}
+
+#trippicture ul li img{
+	border:1px solid #FFFFFF;
+	margin:8px 0px 0px 0px;
+	width:240px;
+	height:200px;
+	overflow:hidden;
+	
+}
+
+.img{
+opacity:0.4;
+filter:alpha(opacity=40); /* For IE8 and earlier */
+}

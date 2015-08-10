@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.lonton.mapper.ITripMapper">
+   <resultMap type="com.lonton.bean.TripData" id="dataResultMap">
+        <id property="target_Id" column="target_id"  />
+        <result property="target_Name" column="name"  />
+        <result property="desc" column="desc"  />
+        <result property="cover" column="cover"  />
+    </resultMap> 
+    
+    <!-- 通过parent_target_id得到TripData对象 -->
+    <select id = "getTripDataByParent_targetId"  parameterType = "int" resultType ="com.lonton.bean.TripData"
+                 resultMap="dataResultMap">
+       SELECT target_id
+       		  ,name
+         	  ,`desc` 
+         	  ,cover
+       FROM travel_temp_colleague.t_target 
+       WHERE parent_target_id = #{parent_target_id}         
+                 </select>
+</mapper>
