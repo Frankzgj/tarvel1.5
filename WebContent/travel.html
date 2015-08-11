@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>去远方</title>
+	<link href="travel.css" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="trip/js/travel.js"></script>
+	<script type="text/javascript"  src="trip/js/jquery.js"></script>
+	<script type="text/javascript"  src="trip/js/json.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		    $.post("target",{parentTargetId:36407}, function (data, status){				 
+				  var arr = eval(data);
+				  var path ="http://121.40.142.220:8082/justforhelp_fileservice/files";
+			 	  var table = document.getElementById("pictureTable");
+				  for(var i=0; i<=arr.length; i++){
+						var tr =table.insertRow(table.rows.length);   				
+						for(var j=0;j<3;j++){
+							var td1 = tr.insertCell(j);  	
+							var jsonObj = arr[i]; 
+							//div.setAttribute("parentTargetId",jsonObj.target_Id);
+							i++;
+							td1.innerHTML = "<div id='clip-img_three'> <img class='clip-img_four' src='"+path+jsonObj.cover+"'/>" 
+				                + "<span style='position: absolute; top: 0; left: 0;'>"+jsonObj.target_Name+"</span> </div> ";
+						   }  		
+			    		} 		 
+				 }, "json");
+
+
+		});
+	
+	$(function(){
+		$("#clip-img_three").each(function(){
+			$(this).click(function(){
+				getByID();
+			});
+		});
+	});
+	//创建XMLHttpReques对象  
+    function createXMLHttpRequest(){         
+        if(window.XMLHttpRequest){  
+            //Mozilla浏览器               
+            XMLHttpReq=new XMLHttpRequest();  
+        }else{                
+            //IE浏览器  
+            if(window.ActiveXObject){  
+                try{  
+                    XMLHttpReq=new ActionXObject("Msxm12.XMLHTTP");  
+                }catch(e){  
+                    try{  
+                        XMLHttpReq=new ActiveXObject("Microsoft.XMLHTTP");  
+                    }catch(e){}  
+                }  
+            }  
+        }  
+    }  
+    //处理服务器响应结果  
+     function handleResponse() {  
+        // 判断对象状态  
+        if (XMLHttpReq.readyState == 4) {   
+            // 信息已经成功返回，开始处理信息  
+           if (XMLHttpReq.status == 200) {   
+        	   var json =XMLHttpReq.responseText;
+        	    contactList(json);
+               }  
+         }  
+       }  
+    //发送客户端的请求  
+    function sendRequest(url){  
+        createXMLHttpRequest();     
+        XMLHttpReq.onreadystatechange=handleResponse;  
+        XMLHttpReq.open("get",url,true);  
+       XMLHttpReq.send(null);   
+    }  
+    
+    //开始调用Ajax的功能   getById
+    function getById()  {    
+        var parentTargetId=document.getElementById("parentTargetId").value;  
+        sendRequest("target?parentTargetId="+parentTargetId);  
+    }  
+    
+    
+	</script>
+	
+	<style>
+#clip-img_three{
+	
+    width:220px;
+    height:130px;
+	margin-top:20px;
+	margin-left:20px;
+	float:left;	
+	position:relative;
+}
+.clip-img_four{	
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:100%;  
+  height:100%;
+ 
+  alt="";
+}
+	</style>
+ </head>
+
+<body>
+<div id="container">
+  <div id="banner">
+		<div id="bread">
+		       <a href="#">中国</a>
+			   &gt;
+			    <a href="#">湖南</a>
+			   &gt;
+			    <a href="#">长沙</a>
+			   &gt;
+				<a href="#">中国</a>
+    	</div>
+		<div id="tripname" style="margin: 35px;   font-size:35px;   font-family:Geneva, Arial, Helvetica, sans-serif;">岳麓山</div>
+		<div id="introductions ">岳麓山位于湖南省长沙市的湘江西岸，为城市山岳型风景名胜区，是南岳衡山七十二峰之一。已开放的景区有麓山景区、橘子洲头景区。这里荟萃了湘楚文化的精华，名胜古迹众多，集儒、释、道为一体，革命圣迹遍布且植物资源丰富。</div>
+  </div>
+  
+  
+  <table id="pictureTable">
+  </table>
+</div> 
+</body>
+</html>
+  <!--  
+  <div id="trippicture" style="margin-left: -20px;">  
+      <ul>
+	      <li style="float: left;   margin-right:11px;">
+	      	<img src="picture/tianxinge.jpg" style="width: 240px;   height:200px;   overflow:hidden;"></li>
+		  <li style="
+    float: left;    margin-right: 11px;
+"><img src="picture/juzizhou.jpg" style="
+    width: 240px;   height:200px;   overflow:hidden;
+"></li>
+		  <li style="
+    float: left;    margin-right: 11px;
+"><img src="picture/zibeiting.jpg" style="
+    width: 240px;    height: 200px;    overflow: hidden;
+"></li>
+		  <li style="
+    float: left;    margin-right: 11px;
+"><img src="picture/yuelushan.jpg" style="
+    width: 240px;    height: 200px;    overflow: hidden;
+"></li>
+		  <li style="
+    float: left;    margin-right: 11px;
+"><img src="picture/wly.jpg" style="
+    width: 240px;    height: 200px;    overflow: hidden;
+"></li>
+	  </ul>
+  </div>
+  -->
+  

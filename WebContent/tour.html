@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script type="text/javascript"  src="js/jquery.js"></script>
+<script type="text/javascript"  src="js/json.js"></script>
+<script type="text/javascript"> 
+ 
+ $(function() {
+	 $.post("target",{targetId:36407}, function (data, status){				 
+		  var arr = eval(data);
+		 var path ="http://121.40.142.220:8082/justforhelp_fileservice/files";
+ 		  var table = document.getElementById("contactTable");
+		   for(var i=0; i<=arr.length; i++){
+				var tr =table.insertRow(table.rows.length);   				
+			   for(var j=0;j<3;j++){
+					var td1 = tr.insertCell(j);  	
+					var jsonObj = arr[i]; 
+					i++;
+					td1.innerHTML = "<div class='clip-img_three'> <a href='two.html?tagetId="+jsonObj.targetId+"'> <img class='clip-img_four'  src='"+path+jsonObj.cover+"';/></a>" 
+	                + "<div class='desc2'>"+  jsonObj.name +"</div>   </div> ";
+			   }  		
+    		} 		 
+	 }, "json");
+
+});
+
+ function contactList(jsons){
+		var table = document.getElementById("contactTable");
+        var arr = eval("(" + jsons + ")");
+        if(arr.length == 0){     
+        	alert("输入有误，请重新输入")
+        }
+        else{
+        	 for(var i=0; i<=arr.length; i++){
+     			var jsonObj = arr[i]; //获取json对象
+     			var tr = table.insertRow(table.rows.length);//获取table列数
+     			var td1 = tr.insertCell(0);
+     			td1.align = "center";
+     			var td2 = tr.insertCell(1);
+     			td2.align = "center";
+     			var td3 = tr.insertCell(2);
+     			td3.align = "center";
+     			var td4 = tr.insertCell(3);
+     			td4.align = "center";
+     			var td5 = tr.insertCell(4);
+     			td5.align = "center";
+     			var td6 = tr.insertCell(5);
+     			td6.align = "center";
+     			var td7 = tr.insertCell(6);
+     			td7.align = "center";
+     			var td8 = tr.insertCell(7);
+     			td8.align = "center";					 
+     			 td1.innerHTML = jsonObj.targetId;
+     			td2.innerHTML = jsonObj.name;
+     			td3.innerHTML = jsonObj.pinyin;
+     			td4.innerHTML = jsonObj.desc;
+     			td5.innerHTML = jsonObj.type;
+     			td6.innerHTML = jsonObj.parentTargetId;
+     			td7.innerHTML = jsonObj.targetType;
+     			td8.innerHTML = jsonObj.scenicLevel; 
+     		} 	
+        }
+	}
+
+    //创建XMLHttpReques对象  
+    function createXMLHttpRequest(){         
+        if(window.XMLHttpRequest){  
+            //Mozilla浏览器               
+            XMLHttpReq=new XMLHttpRequest();  
+        }else{                
+            //IE浏览器  
+            if(window.ActiveXObject){  
+                try{  
+                    XMLHttpReq=new ActionXObject("Msxm12.XMLHTTP");  
+                }catch(e){  
+                    try{  
+                        XMLHttpReq=new ActiveXObject("Microsoft.XMLHTTP");  
+                    }catch(e){}  
+                }  
+            }  
+        }  
+    }  
+    //处理服务器响应结果  
+     function handleResponse() {  
+        // 判断对象状态  
+        if (XMLHttpReq.readyState == 4) {   
+            // 信息已经成功返回，开始处理信息  
+           if (XMLHttpReq.status == 200) {   
+        	   var json =XMLHttpReq.responseText;
+        	    contactList(json);
+               }  
+         }  
+       }  
+    //发送客户端的请求  
+    function sendRequest(url){  
+        createXMLHttpRequest();     
+        XMLHttpReq.onreadystatechange=handleResponse;  
+        XMLHttpReq.open("get",url,true);  
+       XMLHttpReq.send(null);   
+    }  
+    
+    //开始调用Ajax的功能   getById
+    function getById()  {    
+        var targetId=document.getElementById("targetId").value;  
+        sendRequest("target?targetId="+targetId);  
+    }  
+    
+    //开始调用Ajax的功能   getByName
+    function getByName()  
+    {  
+        var name=document.getElementById("name").value;  
+        //发送请求  
+        sendRequest("target?name="+name);  
+    }  
+</script> 
+<style>
+.clip-img_one {
+	background-image:url(image/zhongguo.jpg);
+	margin-left: auto;
+    margin-right: auto;
+    width:800px;
+    height: 300px; 
+} 
+.clip-img_two {
+	margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+	width:800px;
+    height: 600px; 
+	
+     
+} 
+
+.clip-text_one {
+  margin-top:30px;
+  font-size: 3em;
+  color: #fff;
+}
+.desc {
+  margin-top:30px;
+  font-size: 1em;
+  color: #fff;
+}
+.desc2 {
+ position:absolute;
+  margin-top:50px;
+  font-size: 2em;
+  color: #fff;
+   z-Index:-1;
+}
+.clip-text_two {
+  font-size: 2em;
+
+}
+
+.clip-img_three{
+	
+    width:220px;
+    height:130px;
+	margin-top:20px;
+	margin-left:20px;
+	float:left;	
+	position:relative
+}
+.clip-img_four{	
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:100%;  
+  height:100%;
+  z-Index:2;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="clip-img_one">
+  <div class="desc">
+<a href="/">中国</a>
+>
+<a href="/browse/74?lm=2">湖南</a>
+>
+<a href="/browse/1073?lm=2">长沙</a>
+>
+<a href="/browse/93?lm=2">岳麓山</a>
+</div> 
+<div class="clip-text_one">
+  中国
+  </div>
+  <div class="desc">
+ 中国，即中华人民共和国，陆地领土包括中国大陆及其沿海岛屿、台湾及其包括钓鱼岛在内的附属各岛、澎湖列岛、东沙群岛、西沙群岛、中沙群岛、南沙群岛以及其他一切属于中华人民共和国的岛屿(包括钓鱼岛、黄尾屿、赤尾屿），共约960万平方公里。所管辖的海域面积约为300万平方公里（包括九段线以内的所有海域）。1949年10月1日起，国名全称为中华人民共和国，人口约13亿（2010），首都北京。
+ </div>
+</div>
+
+ <div class="clip-img_two">
+    <div class="clip-text_two">
+    中国共34个省直辖市
+    </div>   
+<table   id="contactTable">
+
+</table>
+ </div>
+</body>
+</html>

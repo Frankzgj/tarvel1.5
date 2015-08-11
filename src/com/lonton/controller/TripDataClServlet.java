@@ -31,6 +31,7 @@ public class TripDataClServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/json; charset=UTF-8");
 		String parentTargetId = request.getParameter("parentTargetId");
+		System.out.println("ok");
 		DatabaseService dbs = new DatabaseService();
 		ITripMapper userOperation = dbs.databaseService();
 		JSONArray target = null;
@@ -41,6 +42,7 @@ public class TripDataClServlet extends HttpServlet {
 				
 				ArrayList<TripData> datas = userOperation.getTripDataByParent_targetId(Integer.parseInt(parentTargetId));
 			    target = JSONArray.fromObject(datas);
+			    System.out.println(target.toString());
 			    
 			}
 		      PrintWriter out = response.getWriter();  
